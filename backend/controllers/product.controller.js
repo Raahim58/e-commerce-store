@@ -1,7 +1,6 @@
-import { Redis } from "ioredis";
 import Product from "../models/product.model.js"
 import cloudinary from "../lib/cloudinary.js";
-import redis from "../lib/redis.js";
+import { redis } from "../lib/redis.js";
 
 export const getAllProducts = async (req,res) => {
     try {
@@ -40,7 +39,7 @@ export const createProduct = async (req, res) => {
         const {name, description, price, image, category} = req.body;
         let cloudinaryResponse = null;
         if(image) {
-            await cloudinary.uploader.upload(image, (folder: "prodcuts"));
+            cloudinaryResponse = await cloudinary.uploader.upload(image, {folder: "products"});
         }
 
         const product = await Product.create({
