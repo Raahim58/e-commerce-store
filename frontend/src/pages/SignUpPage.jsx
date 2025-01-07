@@ -39,7 +39,7 @@ const SignUpPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-gray-700 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <TextInput
               id="name"
@@ -85,7 +85,7 @@ const SignUpPage = () => {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent 
 							rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600
-							 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+							 hover:bg-emerald-200 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2
 							  focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50"
               disabled={loading}
             >
@@ -103,7 +103,7 @@ const SignUpPage = () => {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-gray-400">
+          <p className="mt-8 text-center text-sm text-gray-200">
             already have an account?{" "}
             <Link to="/login" className="font-medium text-emerald-400 hover:text-emerald-300">
               login here <ArrowRight className="inline h-4 w-4" />
