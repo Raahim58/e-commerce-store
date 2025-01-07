@@ -29,7 +29,7 @@ const SignUpPage = () => {
         transition={{ duration: 0.8 }}
       >
         <h2 className="mt-6 text-center text-3xl font-extrabold text-emerald-400">
-          Create your account
+          create your account
         </h2>
       </motion.div>
 
@@ -43,17 +43,17 @@ const SignUpPage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <TextInput
               id="name"
-              label="Full name"
+              label="full name"
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="John Doe"
+              placeholder="john doe"
               icon={User}
             />
 
             <TextInput
               id="email"
-              label="Email address"
+              label="email address"
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -63,7 +63,7 @@ const SignUpPage = () => {
 
             <TextInput
               id="password"
-              label="Password"
+              label="password"
               type="password"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -73,7 +73,7 @@ const SignUpPage = () => {
 
             <TextInput
               id="confirmPassword"
-              label="Confirm Password"
+              label="confirm password"
               type="password"
               value={formData.confirmPassword}
               onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
@@ -97,16 +97,16 @@ const SignUpPage = () => {
               ) : (
                 <>
                   <UserPlus className="mr-2 h-5 w-5" aria-hidden="true" />
-                  Sign up
+                  sign up
                 </>
               )}
             </button>
           </form>
 
           <p className="mt-8 text-center text-sm text-gray-400">
-            Already have an account?{" "}
+            already have an account?{" "}
             <Link to="/login" className="font-medium text-emerald-400 hover:text-emerald-300">
-              Login here <ArrowRight className="inline h-4 w-4" />
+              login here <ArrowRight className="inline h-4 w-4" />
             </Link>
           </p>
         </div>
