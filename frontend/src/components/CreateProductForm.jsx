@@ -20,6 +20,7 @@ const CreateProductForm = () => {
 		e.preventDefault();
 		try {
 			await createProduct(newProduct);
+			
 			setNewProduct({ name: "", description: "", price: "", category: "", image: "" });
 		} catch {
 			console.log("error creating a product");
@@ -46,12 +47,12 @@ const CreateProductForm = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8 }}
 		>
-			<h2 className='text-2xl font-semibold mb-6 text-emerald-300'>Create New Product</h2>
+			<h2 className='text-center text-2xl font-semibold mb-6 text-emerald-300'>create new product</h2>
 
 			<form onSubmit={handleSubmit} className='space-y-4'>
 				<div>
 					<label htmlFor='name' className='block text-sm font-medium text-gray-300'>
-						Product Name
+						product name
 					</label>
 					<input
 						type='text'
@@ -68,7 +69,7 @@ const CreateProductForm = () => {
 
 				<div>
 					<label htmlFor='description' className='block text-sm font-medium text-gray-300'>
-						Description
+						description
 					</label>
 					<textarea
 						id='description'
@@ -85,7 +86,7 @@ const CreateProductForm = () => {
 
 				<div>
 					<label htmlFor='price' className='block text-sm font-medium text-gray-300'>
-						Price
+						price
 					</label>
 					<input
 						type='number'
@@ -103,7 +104,7 @@ const CreateProductForm = () => {
 
 				<div>
 					<label htmlFor='category' className='block text-sm font-medium text-gray-300'>
-						Category
+						category
 					</label>
 					<select
 						id='category'
@@ -115,7 +116,7 @@ const CreateProductForm = () => {
 						 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500'
 						required
 					>
-						<option value=''>Select a category</option>
+						<option value=''>select a category</option>
 						{categories.map((category) => (
 							<option key={category} value={category}>
 								{category}
@@ -131,7 +132,7 @@ const CreateProductForm = () => {
 						className='cursor-pointer bg-gray-700 py-2 px-3 border border-gray-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500'
 					>
 						<Upload className='h-5 w-5 inline-block mr-2' />
-						Upload Image
+						upload image
 					</label>
 					{newProduct.image && <span className='ml-3 text-sm text-gray-400'>Image uploaded </span>}
 				</div>
@@ -139,19 +140,19 @@ const CreateProductForm = () => {
 				<button
 					type='submit'
 					className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md 
-					shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 
+					shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 hover:text-black
 					focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50'
 					disabled={loading}
 				>
 					{loading ? (
 						<>
 							<Loader className='mr-2 h-5 w-5 animate-spin' aria-hidden='true' />
-							Loading...
+							loading...
 						</>
 					) : (
 						<>
 							<PlusCircle className='mr-2 h-5 w-5' />
-							Create Product
+							create product
 						</>
 					)}
 				</button>

@@ -8,9 +8,9 @@ import ProductsList from "../components/ProductsList";
 import { useProductStore } from "../stores/useProductStore";
 
 const tabs = [
-	{ id: "create", label: "Create Product", icon: PlusCircle },
-	{ id: "products", label: "Products", icon: ShoppingBasket },
-	{ id: "analytics", label: "Analytics", icon: BarChart },
+	{ id: "create", label: "add product", icon: PlusCircle },
+	{ id: "products", label: "products", icon: ShoppingBasket },
+	{ id: "analytics", label: "analytics", icon: BarChart },
 ];
 
 const AdminPage = () => {
@@ -30,7 +30,7 @@ const AdminPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
 				>
-					Admin Dashboard
+					admin dashboard
 				</motion.h1>
 
 				<div className='flex justify-center mb-8'>
