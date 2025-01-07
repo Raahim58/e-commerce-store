@@ -34,7 +34,7 @@ const FeaturedProducts = ({ featuredProducts = [] }) => {
 	return (
 		<div className='py-12'>
 			<div className='container mx-auto px-4'>
-				<h2 className='text-center text-5xl sm:text-6xl font-bold text-emerald-400 mb-4'>Featured</h2>
+				<h2 className='text-center text-5xl sm:text-6xl font-bold text-emerald-400 mb-4'>featured</h2>
 				<div className='relative'>
 					<div className='overflow-hidden'>
 						<div
@@ -60,10 +60,10 @@ const FeaturedProducts = ({ featuredProducts = [] }) => {
 												<button
 													onClick={() => addToCart(product)}
 													className='w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
-												flex items-center justify-center'
+												flex items-center justify-center hover:text-black'
 												>
 													<ShoppingCart className='w-5 h-5 mr-2' />
-													Add to Cart
+													add to cart
 												</button>
 											</div>
 										</div>

@@ -13,7 +13,7 @@ export const getAllProducts = async (req,res) => {
 
 export const getFeaturedProducts = async (req, res) => {
     try {
-        let featuredProducts = await Redis.get("featured_products")
+        let featuredProducts = await redis.get("featured_products")
         if (featuredProducts) {
             return res.json(JSON.parse(featuredProducts));
         }
@@ -26,7 +26,7 @@ export const getFeaturedProducts = async (req, res) => {
         }
 
         // store in redis for future quick access
-        await Redis.set("featured_products", JSON.stringify(featuredProducts)); 
+        await redis.set("featured_products", JSON.stringify(featuredProducts)); 
         res.json({ products: featuredProducts });
     } catch (error) {
         console.log("Error in getFeaturedProducts controller", error.message);
@@ -46,7 +46,7 @@ export const createProduct = async (req, res) => {
             name,
             description,
             price,
-            image: cloudinaryResponse?.secure_url ? cloudinaryResponse.second_url: "",
+            image: cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url: "",
             category
         })
 
@@ -84,7 +84,7 @@ export const deleteProduct = async (req, res) => {
 export const getRecommendedProducts = async (req, res) => {
     try {
         const products = await Product.aggregate([
-            { $sample: { size: 3 } },
+            { $sample: { size: 4 } },
             { $project: { _id: 1, name: 1, description: 1, price: 1, image: 1 } },
         ])
         res.json(products)
