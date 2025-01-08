@@ -58,7 +58,7 @@ const Navbar = () => {
                 onClick={logout}
               >
                 <LogOut size={18} />
-                {/* <span className='hidden sm:inline ml-2'>Log Out</span> */}
+                {/* <span className='hidden sm:inline ml-2'>log Out</span> */}
               </button>
             ) : (
               <>
@@ -67,14 +67,14 @@ const Navbar = () => {
                   className="bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out hover:text-black"
                 >
                   <UserPlus className="mr-2" size={18} />
-                  sign up
+                  
                 </Link>
                 <Link
                   to={"/login"}
                   className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out hover:text-black"
                 >
                   <LogIn className="mr-2" size={18} />
-                  login
+                  
                 </Link>
               </>
             )}

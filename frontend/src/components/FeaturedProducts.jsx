@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
+import { useUserStore } from "../stores/useUserStore";
+import { toast } from "react-hot-toast";
 
 const FeaturedProducts = ({ featuredProducts = [] }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
@@ -8,6 +10,7 @@ const FeaturedProducts = ({ featuredProducts = [] }) => {
 	const [isPaused, setIsPaused] = useState(false);
 
 	const { addToCart } = useCartStore();
+	const { user, logout } = useUserStore();
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -79,14 +82,26 @@ const FeaturedProducts = ({ featuredProducts = [] }) => {
 												<p className="text-emerald-300 font-medium mb-4">
 													${product.price.toFixed(2)}
 												</p>
-												<button
+												
+												{ user ? (
+													<button
 													onClick={() => addToCart(product)}
 													className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
-													flex items-center justify-center hover:text-black"
-												>
+														flex items-center justify-center hover:text-black"
+													>
 													<ShoppingCart className="w-5 h-5 mr-2" />
 													add to cart
-												</button>
+													</button>
+												) : (
+													<button
+														onClick={() => toast.error("Please log in to add products to your cart.")} // Show error on click if not logged in
+														className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
+															flex items-center justify-center hover:text-black"
+														>
+														<ShoppingCart className="w-5 h-5 mr-2" />
+														add to cart
+													</button>
+												)}
 											</div>
 										</div>
 									</div>
