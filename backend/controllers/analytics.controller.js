@@ -1,27 +1,44 @@
-import User from "../models/user.model.js";
-import Product from "../models/product.model.js";
 import Order from "../models/order.model.js";
+import Product from "../models/product.model.js";
+import User from "../models/user.model.js";
 
 export const getAnalyticsData = async () => {
-    // get analytics data from database
-    const totalUsers = await User.countDocuments();
-    const totalProducts = await Product.countDocuments();
-    const salesData = await Order.aggregate([
+	const totalUsers = await User.countDocuments() - 1;
+	const totalProducts = await Product.countDocuments();
+
+	const itemsSold = await Order.aggregate([
+        {
+            $unwind: "$products", // Unwinds the products array to count each item individually
+        },
         {
             $group: {
-                _id: null, // it groups all documents together
-                totalSals: {$sum:1},
-                totalRevenue: {$sum:"$totalAmount"}
-            }
-        }
-    ])
-    const {totalSales, totalRevenue} = salesData[0] || {totalSales: 0, totalRevenue: 0};
-    return {
-        users: totalUsers,
-        products: totalProducts,
-        totalSales,
-        totalRevenue
-    }
+                _id: null, // Groups all documents together
+                totalItemsSold: { $sum: "$products.quantity" }, // Sums up the quantity field
+            },
+        },
+    ]);
+
+    const { totalItemsSold } = itemsSold[0] || { itemsSold: 0 };
+	
+	const salesData = await Order.aggregate([
+		{
+			$group: {
+				_id: null, // it groups all documents together,
+				totalSales: { $sum: 1 },
+				totalRevenue: { $sum: "$totalAmount" },
+			},
+		},
+	]);
+
+	const { totalSales, totalRevenue } = salesData[0] || { totalSales: 0, totalRevenue: 0 };
+
+	return {
+		users: totalUsers,
+		products: totalProducts,
+		totalSales,
+		totalRevenue,
+		totalItemsSold,
+	};
 };
 
 export const getDailySalesData = async (startDate, endDate) => {
@@ -55,7 +72,7 @@ export const getDailySalesData = async (startDate, endDate) => {
 		// ]
 
 		const dateArray = getDatesInRange(startDate, endDate);
-		console.log(dateArray) // ['2024-08-18', '2024-08-19', ... ]
+		// console.log(dateArray) // ['2024-08-18', '2024-08-19', ... ]
 
 		return dateArray.map((date) => {
 			const foundData = dailySalesData.find((item) => item._id === date);
