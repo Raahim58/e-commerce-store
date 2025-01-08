@@ -11,8 +11,8 @@ const GiftCouponCard = () => {
 	}, [getMyCoupon]);
 
 	useEffect(() => {
-		if (coupon) setUserInputCode(coupon.code);
-	}, [coupon]);
+		if (coupon && !isCouponApplied ) setUserInputCode(coupon.code);
+	}, [coupon, isCouponApplied]);
 
 	const handleApplyCoupon = () => {
 		if (!userInputCode) return;
@@ -21,7 +21,7 @@ const GiftCouponCard = () => {
 
 	const handleRemoveCoupon = async () => {
 		await removeCoupon();
-		setUserInputCode("");
+		setUserInputCode(getMyCoupon);
 	};
 
 	return (
@@ -51,7 +51,7 @@ const GiftCouponCard = () => {
 
 				<motion.button
 					type='button'
-					className='flex w-full items-center justify-center rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700 hover:text-black focus:outline-none focus:ring-4 focus:ring-emerald-300'
+					className='flex w-full items-center justify-center rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-600 hover:text-black focus:outline-none focus:ring-4 focus:ring-emerald-300'
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 					onClick={handleApplyCoupon}
@@ -69,9 +69,9 @@ const GiftCouponCard = () => {
 
 					<motion.button
 						type='button'
-						className='mt-2 flex w-full items-center justify-center rounded-lg bg-red-600 
-            px-5 py-2.5 text-sm font-medium text-white hover:bg-red-700 focus:outline-none
-             focus:ring-4 focus:ring-red-300'
+						className='mt-2 flex w-full items-center justify-center rounded-lg bg-red-700 
+            px-5 py-2.5 text-sm font-medium text-white hover:bg-red-500 focus:outline-none
+             focus:ring-4 focus:ring-red-300 hover:text-black'
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
 						onClick={handleRemoveCoupon}
@@ -81,7 +81,7 @@ const GiftCouponCard = () => {
 				</div>
 			)}
 
-			{coupon && (
+			{coupon && !isCouponApplied && (
 				<div className='mt-4'>
 					<h3 className='text-lg font-medium text-gray-300'>your available coupon:</h3>
 					<p className='mt-2 text-sm text-gray-400'>
